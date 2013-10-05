@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0118CB17FAC99800EC44B0 /* AudioHost.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0118CA17FAC99800EC44B0 /* AudioHost.m */; };
+		AC0118CE17FAD02700EC44B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */; };
+		AC0118CF17FAD02700EC44B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */; };
+		AC0118D117FADF8C00EC44B0 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */; };
+		AC0118D517FAE4EB00EC44B0 /* instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D417FAE4EB00EC44B0 /* instruments.dls */; };
+		AC0118D817FAE54D00EC44B0 /* offspring.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D717FAE54D00EC44B0 /* offspring.mid */; };
+		AC0118DA17FAE9ED00EC44B0 /* instruments.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */; };
 		AC23F16617EAF98C00F6FB7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16517EAF98C00F6FB7B /* UIKit.framework */; };
 		AC23F16817EAF98C00F6FB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16717EAF98C00F6FB7B /* Foundation.framework */; };
 		AC23F16A17EAF98C00F6FB7B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16917EAF98C00F6FB7B /* CoreGraphics.framework */; };
@@ -19,9 +26,24 @@
 		AC23F17F17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC23F17D17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard */; };
 		AC23F18217EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC23F18017EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard */; };
 		AC23F18517EAF98C00F6FB7B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC23F18417EAF98C00F6FB7B /* ViewController.m */; };
+		AC2D90FA17FB4A7A00F4D443 /* MIDIFile.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */; };
+		AC2D90FF17FB810700F4D443 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D90FE17FB810700F4D443 /* GLKit.framework */; };
+		AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */; };
+		AC2D910517FB835100F4D443 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910317FB835000F4D443 /* OpenGLES.framework */; };
+		AC2D910617FB835100F4D443 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910417FB835100F4D443 /* QuartzCore.framework */; };
+		AC2D910917FC17BC00F4D443 /* MIDISample.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D910817FC17BC00F4D443 /* MIDISample.m */; };
+		AC2D911817FF71FD00F4D443 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D911717FF71FD00F4D443 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC0118C917FAC99800EC44B0 /* AudioHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioHost.h; path = Guitar/Classes/AudioHost.h; sourceTree = "<group>"; };
+		AC0118CA17FAC99800EC44B0 /* AudioHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioHost.m; path = Guitar/Classes/AudioHost.m; sourceTree = "<group>"; };
+		AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		AC0118D417FAE4EB00EC44B0 /* instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; name = instruments.dls; path = Guitar/Ressources/Sounds/instruments.dls; sourceTree = "<group>"; };
+		AC0118D717FAE54D00EC44B0 /* offspring.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = offspring.mid; path = Guitar/Ressources/Songs/offspring.mid; sourceTree = "<group>"; };
+		AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = instruments.sf2; path = Guitar/Ressources/Sounds/instruments.sf2; sourceTree = "<group>"; };
 		AC23F16217EAF98C00F6FB7B /* Guitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC23F16517EAF98C00F6FB7B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AC23F16717EAF98C00F6FB7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +61,16 @@
 		AC23F18117EAF98C00F6FB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		AC23F18317EAF98C00F6FB7B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AC23F18417EAF98C00F6FB7B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AC2D90F817FB4A7A00F4D443 /* MIDIFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIFile.h; path = Guitar/Classes/MIDIFile.h; sourceTree = "<group>"; };
+		AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDIFile.m; path = Guitar/Classes/MIDIFile.m; sourceTree = "<group>"; };
+		AC2D90FE17FB810700F4D443 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		AC2D910017FB813700F4D443 /* GuitarGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuitarGLKViewController.h; path = Guitar/Classes/GuitarGLKViewController.h; sourceTree = "<group>"; };
+		AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuitarGLKViewController.m; path = Guitar/Classes/GuitarGLKViewController.m; sourceTree = "<group>"; };
+		AC2D910317FB835000F4D443 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		AC2D910417FB835100F4D443 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AC2D910717FC17BC00F4D443 /* MIDISample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDISample.h; path = Guitar/Classes/MIDISample.h; sourceTree = "<group>"; };
+		AC2D910817FC17BC00F4D443 /* MIDISample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDISample.m; path = Guitar/Classes/MIDISample.m; sourceTree = "<group>"; };
+		AC2D911717FF71FD00F4D443 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +78,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC2D911817FF71FD00F4D443 /* Accelerate.framework in Frameworks */,
+				AC2D910517FB835100F4D443 /* OpenGLES.framework in Frameworks */,
+				AC2D910617FB835100F4D443 /* QuartzCore.framework in Frameworks */,
+				AC2D90FF17FB810700F4D443 /* GLKit.framework in Frameworks */,
+				AC0118D117FADF8C00EC44B0 /* CoreMIDI.framework in Frameworks */,
+				AC0118CE17FAD02700EC44B0 /* AudioToolbox.framework in Frameworks */,
+				AC0118CF17FAD02700EC44B0 /* AVFoundation.framework in Frameworks */,
 				AC23F16617EAF98C00F6FB7B /* UIKit.framework in Frameworks */,
 				AC23F16817EAF98C00F6FB7B /* Foundation.framework in Frameworks */,
 				AC23F16A17EAF98C00F6FB7B /* CoreGraphics.framework in Frameworks */,
@@ -55,12 +94,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC0118C817FAC93400EC44B0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AC0118C917FAC99800EC44B0 /* AudioHost.h */,
+				AC0118CA17FAC99800EC44B0 /* AudioHost.m */,
+				AC2D90F817FB4A7A00F4D443 /* MIDIFile.h */,
+				AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */,
+				AC2D910017FB813700F4D443 /* GuitarGLKViewController.h */,
+				AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */,
+				AC2D910717FC17BC00F4D443 /* MIDISample.h */,
+				AC2D910817FC17BC00F4D443 /* MIDISample.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		AC0118D217FAE47900EC44B0 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				AC0118D617FAE4F300EC44B0 /* Songs */,
+				AC0118D317FAE4D400EC44B0 /* Sounds */,
+			);
+			name = Ressources;
+			sourceTree = "<group>";
+		};
+		AC0118D317FAE4D400EC44B0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */,
+				AC0118D417FAE4EB00EC44B0 /* instruments.dls */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		AC0118D617FAE4F300EC44B0 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				AC0118D717FAE54D00EC44B0 /* offspring.mid */,
+			);
+			name = Songs;
+			sourceTree = "<group>";
+		};
 		AC23F15917EAF98C00F6FB7B = {
 			isa = PBXGroup;
 			children = (
-				AC23F16B17EAF98C00F6FB7B /* Guitar */,
+				AC0118C817FAC93400EC44B0 /* Classes */,
 				AC23F16417EAF98C00F6FB7B /* Frameworks */,
+				AC23F16B17EAF98C00F6FB7B /* Guitar */,
 				AC23F16317EAF98C00F6FB7B /* Products */,
+				AC0118D217FAE47900EC44B0 /* Ressources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +157,13 @@
 		AC23F16417EAF98C00F6FB7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC2D911717FF71FD00F4D443 /* Accelerate.framework */,
+				AC2D910317FB835000F4D443 /* OpenGLES.framework */,
+				AC2D910417FB835100F4D443 /* QuartzCore.framework */,
+				AC2D90FE17FB810700F4D443 /* GLKit.framework */,
+				AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */,
+				AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */,
+				AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */,
 				AC23F16517EAF98C00F6FB7B /* UIKit.framework */,
 				AC23F16717EAF98C00F6FB7B /* Foundation.framework */,
 				AC23F16917EAF98C00F6FB7B /* CoreGraphics.framework */,
@@ -167,6 +256,9 @@
 				AC23F17C17EAF98C00F6FB7B /* Default-568h@2x.png in Resources */,
 				AC23F17F17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard in Resources */,
 				AC23F18217EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard in Resources */,
+				AC0118D517FAE4EB00EC44B0 /* instruments.dls in Resources */,
+				AC0118D817FAE54D00EC44B0 /* offspring.mid in Resources */,
+				AC0118DA17FAE9ED00EC44B0 /* instruments.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +272,10 @@
 				AC23F17217EAF98C00F6FB7B /* main.m in Sources */,
 				AC23F17617EAF98C00F6FB7B /* AppDelegate.m in Sources */,
 				AC23F18517EAF98C00F6FB7B /* ViewController.m in Sources */,
+				AC0118CB17FAC99800EC44B0 /* AudioHost.m in Sources */,
+				AC2D90FA17FB4A7A00F4D443 /* MIDIFile.m in Sources */,
+				AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */,
+				AC2D910917FC17BC00F4D443 /* MIDISample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +373,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Guitar/Guitar-Prefix.pch";
 				INFOPLIST_FILE = "Guitar/Guitar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -288,6 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Guitar/Guitar-Prefix.pch";
 				INFOPLIST_FILE = "Guitar/Guitar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -312,6 +410,7 @@
 				AC23F18A17EAF98C00F6FB7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
