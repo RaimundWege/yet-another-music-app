@@ -25,6 +25,25 @@
 	return self;
 }
 
+#pragma mark Control
+
+- (void)start
+{
+    // Setup the audio session
+    [self setupAudioSession];
+    
+    // Create the audio processing graph
+    [self createAUGraph];
+    
+    // Initialize the audio processing graph.
+    CheckError(AUGraphInitialize(self.processingGraph),
+               "Couldn't initialze audio processing graph");
+    
+    // Start the graph
+    CheckError(AUGraphStart(self.processingGraph),
+               "Couldn't start audio processing graph");
+}
+
 #pragma mark AUGraph
 
 - (void)createAUGraph
@@ -129,7 +148,7 @@
 	rioASBD.mBytesPerFrame     = 2; // = mBytesPerPacket * mFramesPerPacket
 	rioASBD.mChannelsPerFrame  = 1;
 	rioASBD.mBitsPerChannel    = 16;*/
-    /*size_t bytesPerSample = sizeof(float);
+    size_t bytesPerSample = sizeof(float);
     rioASBD.mSampleRate        = hardwareSampleRate;
     rioASBD.mFormatID          = kAudioFormatLinearPCM;
     rioASBD.mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked;
@@ -137,15 +156,15 @@
     rioASBD.mFramesPerPacket   = 1;
     rioASBD.mBytesPerFrame     = bytesPerSample * 1; // = mBytesPerPacket * mFramesPerPacket
     rioASBD.mChannelsPerFrame  = 1;
-    rioASBD.mBitsPerChannel    = 8 * bytesPerSample;*/
-    rioASBD.mSampleRate        = hardwareSampleRate;
+    rioASBD.mBitsPerChannel    = 8 * bytesPerSample;
+    /*rioASBD.mSampleRate        = hardwareSampleRate;
     rioASBD.mFormatID          = kAudioFormatLinearPCM;
     rioASBD.mFormatFlags       = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
     rioASBD.mBytesPerPacket    = 2;
     rioASBD.mFramesPerPacket   = 1;
     rioASBD.mBytesPerFrame     = 2; // = mBytesPerPacket * mFramesPerPacket
     rioASBD.mChannelsPerFrame  = 1;
-    rioASBD.mBitsPerChannel    = 16;
+    rioASBD.mBitsPerChannel    = 16;*/
     [self printASBD:rioASBD withName:@"RIO unit"];
     
 	/*/ Set ASBD for output (bus 0) on RIO's input scope
@@ -362,32 +381,6 @@
     CAShow(self.processingGraph);
 }
 
-#pragma mark Control
-
-- (void)start
-{
-    // Setup the audio session
-    [self setupAudioSession];
-    
-    // Create the audio processing graph
-    [self createAUGraph];
-    
-    // Initialize the audio processing graph.
-    CheckError(AUGraphInitialize(self.processingGraph),
-               "Couldn't initialze audio processing graph");
-    
-    // Start the graph
-    CheckError(AUGraphStart(self.processingGraph),
-               "Couldn't start audio processing graph");
-    
-    int32_t *l_fftData = (int32_t *)malloc(sizeof(int32_t) * (_effectState.mNumberFrames / 2));
-    while (YES) {
-        if ([self computeFFT:l_fftData]) {
-            NSLog(@"compute!");
-        }
-    }
-}
-
 - (void)setDLSOrSoundFontFor:(AudioUnit)audioUnit fromURL:(NSURL *)bankURL bankMSB:(UInt8)bankMSB bankLSB:(UInt8)bankLSB withPatch:(int)presetNumber
 {
     // Fill out a bank preset data structure
@@ -412,9 +405,9 @@
 {
     // Inititalize audio session and set interruption listener
     CheckError(AudioSessionInitialize(NULL,
-                                      kCFRunLoopDefaultMode,
+                                      NULL,
                                       MyInterruptionListener,
-                                      (__bridge void *)(self)),
+                                      (__bridge void *)self),
                "Couldn't initialize audio session");
     
     // Set audio session category
@@ -458,12 +451,16 @@
 
 static void MyInterruptionListener(void *inUserData, UInt32 inInterruptionState)
 {
-	printf("Interrupted! inInterruptionState=%ld", inInterruptionState);
+	printf("Interrupted! inInterruptionState=%ld\n", inInterruptionState);
 	AudioHost *audioHost = (__bridge AudioHost *)inUserData;
     switch (inInterruptionState) {
         case kAudioSessionBeginInterruption:
+            printf("Begin interruption\n");
+            CheckError(AudioOutputUnitStop(audioHost.rioUnit),
+                       "Couldn't stop RIO unit");
             break;
         case kAudioSessionEndInterruption:
+            printf("End interruption\n");
             CheckError(AudioSessionSetActive(YES),
                        "Couldn't set audio session active");
             CheckError(AudioUnitInitialize(audioHost.rioUnit),
@@ -589,7 +586,7 @@ static void MyMIDIReadProc(const MIDIPacketList *pktlist, void *refCon, void *co
     }
 }
 
-#pragma mark helpers
+#pragma mark Helpers
 
 static void CheckError(OSStatus error, const char *operation)
 {
@@ -608,6 +605,23 @@ static void CheckError(OSStatus error, const char *operation)
     
 	fprintf(stderr, "Error: %s (%s)\n", operation, str);
 	exit(1);
+}
+
+- (void)printASBD:(AudioStreamBasicDescription)asbd withName:(NSString *)name
+{
+    char formatIDString[5];
+    UInt32 formatID = CFSwapInt32HostToBig(asbd.mFormatID);
+    bcopy(&formatID, formatIDString, 4);
+    formatIDString[4] = '\0';
+    NSLog(@"%@ ASBD", name);
+    NSLog(@"  Sample Rate:         %10.0f",    asbd.mSampleRate);
+    NSLog(@"  Format ID:           %10s",      formatIDString);
+    NSLog(@"  Format Flags:        %10lu",     asbd.mFormatFlags);
+    NSLog(@"  Bytes per Packet:    %10lu",     asbd.mBytesPerPacket);
+    NSLog(@"  Frames per Packet:   %10lu",     asbd.mFramesPerPacket);
+    NSLog(@"  Bytes per Frame:     %10lu",     asbd.mBytesPerFrame);
+    NSLog(@"  Channels per Frame:  %10lu",     asbd.mChannelsPerFrame);
+    NSLog(@"  Bits per Channel:    %10lu",     asbd.mBitsPerChannel);
 }
 
 #pragma mark Fast Fourier Transformation
@@ -744,23 +758,6 @@ static void CheckError(OSStatus error, const char *operation)
         // Start the song
         [_midiFile play];
     }
-}
-
-- (void)printASBD:(AudioStreamBasicDescription)asbd withName:(NSString *)name
-{
-    char formatIDString[5];
-    UInt32 formatID = CFSwapInt32HostToBig(asbd.mFormatID);
-    bcopy(&formatID, formatIDString, 4);
-    formatIDString[4] = '\0';
-    NSLog(@"%@ ASBD", name);
-    NSLog(@"  Sample Rate:         %10.0f",    asbd.mSampleRate);
-    NSLog(@"  Format ID:           %10s",      formatIDString);
-    NSLog(@"  Format Flags:        %10lu",     asbd.mFormatFlags);
-    NSLog(@"  Bytes per Packet:    %10lu",     asbd.mBytesPerPacket);
-    NSLog(@"  Frames per Packet:   %10lu",     asbd.mFramesPerPacket);
-    NSLog(@"  Bytes per Frame:     %10lu",     asbd.mBytesPerFrame);
-    NSLog(@"  Channels per Frame:  %10lu",     asbd.mChannelsPerFrame);
-    NSLog(@"  Bits per Channel:    %10lu",     asbd.mBitsPerChannel);
 }
 
 @end

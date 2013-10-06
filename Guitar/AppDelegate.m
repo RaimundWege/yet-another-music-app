@@ -12,13 +12,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Turn off the idle timer, since this app doesn't rely on constant touch input
+	application.idleTimerDisabled = YES;
+	
     // Create AudioHost and start it
     _audioHost = [AudioHost audioHost];
     [_audioHost start];
     
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application {}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
