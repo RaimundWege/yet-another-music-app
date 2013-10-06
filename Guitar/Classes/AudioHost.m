@@ -53,16 +53,28 @@
                "Unable to create an AUGraph object");
     NSLog(@"AUGraph created!");
     
-    // Create audio units five sampler, one converter, one distortion, one mixer and one rio
-    AUNode samplerNode1, samplerNode2, samplerNode3, samplerNode4, samplerNode5, converterNode, distortionNode, mixerNode, rioNode;
-    
     // Specify the common portion of an audio unit's identify, used for all units in the graph
 	AudioComponentDescription cd = {};
 	cd.componentManufacturer = kAudioUnitManufacturer_Apple;
     cd.componentFlags = 0;
 	cd.componentFlagsMask = 0;
     
+    // Specify the RIO unit and add the RIO unit node to the graph
+    AUNode rioNode;
+    cd.componentType = kAudioUnitType_Output;
+	cd.componentSubType = kAudioUnitSubType_RemoteIO;
+	CheckError(AUGraphAddNode(self.processingGraph, &cd, &rioNode),
+               "Couldn't add the RIO unit to the audio processing graph");
+    
+    // Specify the Distortion unit and add the Distortion unit node to the graph
+    AUNode distortionNode;
+    cd.componentType = kAudioUnitType_Effect;
+    cd.componentSubType = kAudioUnitSubType_Distortion;
+    CheckError(AUGraphAddNode(self.processingGraph, &cd, &distortionNode),
+               "Couldn't add the Distortion unit to the audio processing graph");
+    
     // Specify the Sampler units and add the Sampler unit nodes to the graph
+    AUNode samplerNode1, samplerNode2, samplerNode3, samplerNode4, samplerNode5;
 	cd.componentType = kAudioUnitType_MusicDevice;
 	cd.componentSubType = kAudioUnitSubType_Sampler;
 	CheckError(AUGraphAddNode(self.processingGraph, &cd, &samplerNode1),
@@ -76,29 +88,12 @@
     CheckError(AUGraphAddNode(self.processingGraph, &cd, &samplerNode5),
                "Couldn't add the Sampler 5 unit to the audio processing graph");
     
-    // Specify the Converter unit and add the Converter unit node to the graph
-    cd.componentType = kAudioUnitType_FormatConverter;
-    cd.componentSubType = kAudioUnitSubType_AUConverter;
-    CheckError(AUGraphAddNode(self.processingGraph, &cd, &converterNode),
-               "Couldn't add the Converter unit to the audio processing graph");
-    
-    // Specify the Distortion unit and add the Distortion unit node to the graph
-    cd.componentType = kAudioUnitType_Effect;
-    cd.componentSubType = kAudioUnitSubType_Distortion;
-    CheckError(AUGraphAddNode(self.processingGraph, &cd, &distortionNode),
-               "Couldn't add the Distortion unit to the audio processing graph");
-    
     // Specify the Mixer unit and add the Mixer unit node to the graph
+    AUNode mixerNode;
     cd.componentType = kAudioUnitType_Mixer;
     cd.componentSubType = kAudioUnitSubType_MultiChannelMixer;
     CheckError(AUGraphAddNode(self.processingGraph, &cd, &mixerNode),
                "Couldn't add the Mixer unit to the audio processing graph");
-    
-    // Specify the RIO unit and add the RIO unit node to the graph
-    cd.componentType = kAudioUnitType_Output;
-	cd.componentSubType = kAudioUnitSubType_RemoteIO;
-	CheckError(AUGraphAddNode(self.processingGraph, &cd, &rioNode),
-               "Couldn't add the RIO unit to the audio processing graph");
     
     // Open the audio processing graph
 	CheckError(AUGraphOpen(self.processingGraph),
@@ -148,7 +143,7 @@
 	rioASBD.mBytesPerFrame     = 2; // = mBytesPerPacket * mFramesPerPacket
 	rioASBD.mChannelsPerFrame  = 1;
 	rioASBD.mBitsPerChannel    = 16;*/
-    size_t bytesPerSample = sizeof(float);
+    /*size_t bytesPerSample = sizeof(float);
     rioASBD.mSampleRate        = hardwareSampleRate;
     rioASBD.mFormatID          = kAudioFormatLinearPCM;
     rioASBD.mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked;
@@ -156,25 +151,17 @@
     rioASBD.mFramesPerPacket   = 1;
     rioASBD.mBytesPerFrame     = bytesPerSample * 1; // = mBytesPerPacket * mFramesPerPacket
     rioASBD.mChannelsPerFrame  = 1;
-    rioASBD.mBitsPerChannel    = 8 * bytesPerSample;
-    /*rioASBD.mSampleRate        = hardwareSampleRate;
+    rioASBD.mBitsPerChannel    = 8 * bytesPerSample;*/
+    //size_t bytesPerSample = sizeof(float);
+    rioASBD.mSampleRate        = hardwareSampleRate;
     rioASBD.mFormatID          = kAudioFormatLinearPCM;
-    rioASBD.mFormatFlags       = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    rioASBD.mBytesPerPacket    = 2;
+    rioASBD.mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved;
+    rioASBD.mBytesPerPacket    = 4;
     rioASBD.mFramesPerPacket   = 1;
-    rioASBD.mBytesPerFrame     = 2; // = mBytesPerPacket * mFramesPerPacket
-    rioASBD.mChannelsPerFrame  = 1;
-    rioASBD.mBitsPerChannel    = 16;*/
+    rioASBD.mBytesPerFrame     = 4;
+    rioASBD.mChannelsPerFrame  = 2;
+    rioASBD.mBitsPerChannel    = 32;
     [self printASBD:rioASBD withName:@"RIO unit"];
-    
-	/*/ Set ASBD for output (bus 0) on RIO's input scope
-    CheckError(AudioUnitSetProperty(_rioUnit,
-                                    kAudioUnitProperty_StreamFormat,
-                                    kAudioUnitScope_Input,
-                                    bus0,
-                                    &asbd,
-                                    sizeof(asbd)),
-               "Couldn't set ASBD for RIO on input scope / bus 0");*/
     
 	// Set ASBD for input (bus 1) on RIO's output scope (mic)
 	CheckError(AudioUnitSetProperty(_rioUnit,
@@ -204,65 +191,14 @@
     CheckError(AUGraphNodeInfo(self.processingGraph, distortionNode, NULL, &_distortionUnit),
                "Couldn't obtain Distortion unit from its corresponding node");
     
-    // Get the Distortion unit input format
-    AudioStreamBasicDescription distortionASBD;
-    UInt32 distortionASBDSize = sizeof(distortionASBD);
-    CheckError(AudioUnitGetProperty(_distortionUnit,
-                                    kAudioUnitProperty_StreamFormat,
-                                    kAudioUnitScope_Input,
-                                    0,
-                                    &distortionASBD,
-                                    &distortionASBDSize),
-               "Couldn't get ASBD from Distortion input scope / bus 0");
-    [self printASBD:distortionASBD withName:@"Distortion unit"];
-    
-    // Initialize Distortion unit
-	CheckError(AudioUnitInitialize(_distortionUnit),
-			   "Couldn't initialize Converter unit");
-    NSLog(@"Distortion unit initialized!");
-    
-    //  _____                           _
-    // /  __ \                         | |
-    // | /  \/ ___  _ ____   _____ _ __| |_ ___ _ __
-    // | |    / _ \| '_ \ \ / / _ \ '__| __/ _ \ '__|
-    // | \__/\ (_) | | | \ V /  __/ |  | ||  __/ |
-    //  \____/\___/|_| |_|\_/ \___|_|   \__\___|_|
-    
-    // Obtain the Converter unit instance from its corresponding node
-    CheckError(AUGraphNodeInfo(self.processingGraph, converterNode, NULL, &_converterUnit),
-               "Couldn't obtain Converter unit from its corresponding node");
-    
-	// Set ASBD for output (bus 0) on Converter's input scope
-	CheckError(AudioUnitSetProperty(_converterUnit,
+    // Set ASBD for output (bus 0) on Distortion's input scope
+    CheckError(AudioUnitSetProperty(_distortionUnit,
                                     kAudioUnitProperty_StreamFormat,
                                     kAudioUnitScope_Input,
                                     bus0,
                                     &rioASBD,
                                     sizeof(rioASBD)),
-			   "Couldn't set ASBD for Converter on input scope / bus 0");
-	
-    // Set ASBD for input (bus 0) on Converter's output scope
-    CheckError(AudioUnitSetProperty(_converterUnit,
-                                    kAudioUnitProperty_StreamFormat,
-                                    kAudioUnitScope_Output,
-                                    0,
-                                    &distortionASBD,
-                                    distortionASBDSize),
-               "Couldn't set ASBD for Converter on output scope / bus 0");
-    
-    // Initialize Converter unit
-	CheckError(AudioUnitInitialize(_converterUnit),
-			   "Couldn't initialize Converter unit");
-    NSLog(@"Converter unit initialized!");
-    
-    //  _____      _                ____________ _____
-    // /  ___|    | |               |  ___|  ___|_   _|
-    // \ `--.  ___| |_ _   _ _ __   | |_  | |_    | |
-    //  `--. \/ _ \ __| | | | '_ \  |  _| |  _|   | |
-    // /\__/ /  __/ |_| |_| | |_) | | |   | |     | |
-    // \____/ \___|\__|\__,_| .__/  \_|   \_|     \_/
-    //                      | |
-    //                      |_|
+               "Couldn't set ASBD for Distortion on input scope / bus 0");
     
     // Get the maximum frames per slices from the RIO unit
     UInt32 maxFPS;
@@ -273,9 +209,9 @@
                                     bus0,
                                     &maxFPS,
                                     &maxFPSSize),
-               "Couldn't get the RIO unit's max frames per slice");
+               "Couldn't get the RIO unit's maximum frames per slice");
     
-    // Set the struct
+    // Set the struct for the effect state with all FFT variables
     _effectState.rioUnit = _rioUnit;
     _effectState.mNumberFrames = maxFPS;
     _effectState.mFFTNormFactor = 1.0 / (2 * _effectState.mNumberFrames);
@@ -295,18 +231,16 @@
 	AURenderCallbackStruct callbackStruct;
 	callbackStruct.inputProc = InputRenderCallback;
 	callbackStruct.inputProcRefCon = &_effectState;
-	/*CheckError(AudioUnitSetProperty(_converterUnit,
-                                    kAudioUnitProperty_SetRenderCallback,
-                                    kAudioUnitScope_Global,
-                                    bus0,
-                                    &callbackStruct,
-                                    sizeof(callbackStruct)),
-			   "Couldn't set Converter input render callback on bus 0");*/
     CheckError(AUGraphSetNodeInputCallback(_processingGraph,
-                                           converterNode,
+                                           distortionNode,
                                            bus0,
                                            &callbackStruct),
-               "Couldn't set Converter input render callback on bus 0");
+               "Couldn't set Distortion input render callback on bus 0");
+    
+    // Initialize Distortion unit
+	CheckError(AudioUnitInitialize(_distortionUnit),
+			   "Couldn't initialize Distortion unit");
+    NSLog(@"Distortion unit initialized!");
     
     //  _____                       _
     // /  ___|                     | |
@@ -329,16 +263,6 @@
     CheckError(AUGraphNodeInfo(self.processingGraph, samplerNode5, 0, &_samplerUnit5),
                "Couldn't obtain Sampler 5 unit from its corresponding node");
     
-    // Load the sound font from file
-    NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"sf2"]];
-    
-    // Initialise the sound font
-    [self setDLSOrSoundFontFor:self.samplerUnit1 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:30]; // Distortion
-    [self setDLSOrSoundFontFor:self.samplerUnit2 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:30]; // Distortion
-    [self setDLSOrSoundFontFor:self.samplerUnit3 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:33]; // Fingered Bass
-    [self setDLSOrSoundFontFor:self.samplerUnit4 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:29]; // Overdrive
-    [self setDLSOrSoundFontFor:self.samplerUnit5 fromURL:presetURL bankMSB:kAUSampler_DefaultPercussionBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:0]; // Percussion
-    
     // ___  ____
     // |  \/  (_)
     // | .  . |___  _____ _ __
@@ -352,30 +276,57 @@
     
     // Set the bus count for the mixer
     UInt32 numBuses = 6;
-    CheckError(AudioUnitSetProperty(_mixerUnit, kAudioUnitProperty_ElementCount, kAudioUnitScope_Input, 0, &numBuses, sizeof(numBuses)),
+    CheckError(AudioUnitSetProperty(_mixerUnit,
+                                    kAudioUnitProperty_ElementCount,
+                                    kAudioUnitScope_Input,
+                                    0,
+                                    &numBuses,
+                                    sizeof(numBuses)),
                "Couldn't set the bus count for the Mixer unit");
     
+    //  _____                             _   _
+    // /  __ \                           | | (_)
+    // | /  \/ ___  _ __  _ __   ___  ___| |_ _  ___  _ __  ___
+    // | |    / _ \| '_ \| '_ \ / _ \/ __| __| |/ _ \| '_ \/ __|
+    // | \__/\ (_) | | | | | | |  __/ (__| |_| | (_) | | | \__ \
+    //  \____/\___/|_| |_|_| |_|\___|\___|\__|_|\___/|_| |_|___/
+    
     // Connect the Sampler units with the Mixer unit
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode1, 0, mixerNode, 0),
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode1, 0, mixerNode, 1),
                "Couldn't connect the Sampler 1 unit with the Mixer unit");
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode2, 0, mixerNode, 1),
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode2, 0, mixerNode, 2),
                "Couldn't connect the Sampler 2 unit with the Mixer unit");
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode3, 0, mixerNode, 2),
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode3, 0, mixerNode, 3),
                "Couldn't connect the Sampler 3 unit with the Mixer unit");
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode4, 0, mixerNode, 3),
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode4, 0, mixerNode, 4),
                "Couldn't connect the Sampler 4 unit with the Mixer unit");
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode5, 0, mixerNode, 4),
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, samplerNode5, 0, mixerNode, 5),
                "Couldn't connect the Sampler 5 unit with the Mixer unit");
     
-    // Connect the Converter with the Distortion and the Distortion with the Mixer
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, converterNode, 0, distortionNode, 0),
-               "Couldn't connect the Converter unit with the Distortion unit");
-    CheckError(AUGraphConnectNodeInput(self.processingGraph, distortionNode, 0, mixerNode, 5),
+    // Connect the Distortion with the Mixer
+    CheckError(AUGraphConnectNodeInput(self.processingGraph, distortionNode, 0, mixerNode, 0),
                "Couldn't connect the Distortion unit with the Mixer unit");
     
     // Connect the Mixer unit to the RIO unit
     CheckError(AUGraphConnectNodeInput(self.processingGraph, mixerNode, 0, rioNode, 0),
                "Couldn't connect the Mixer unit with the RIO unit");
+    
+    //  _____                       _  __            _
+    // /  ___|                     | |/ _|          | |
+    // \ `--.  ___  _   _ _ __   __| | |_ ___  _ __ | |_ ___
+    //  `--. \/ _ \| | | | '_ \ / _` |  _/ _ \| '_ \| __/ __|
+    // /\__/ / (_) | |_| | | | | (_| | || (_) | | | | |_\__ \
+    // \____/ \___/ \__,_|_| |_|\__,_|_| \___/|_| |_|\__|___/
+    
+    // Load the sound font from file
+    NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"instruments" ofType:@"sf2"]];
+    
+    // Initialise the sound font
+    [self setDLSOrSoundFontFor:self.samplerUnit1 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:30]; // Distortion
+    [self setDLSOrSoundFontFor:self.samplerUnit2 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:30]; // Distortion
+    [self setDLSOrSoundFontFor:self.samplerUnit3 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:33]; // Fingered Bass
+    [self setDLSOrSoundFontFor:self.samplerUnit4 fromURL:presetURL bankMSB:kAUSampler_DefaultMelodicBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:29]; // Overdrive
+    [self setDLSOrSoundFontFor:self.samplerUnit5 fromURL:presetURL bankMSB:kAUSampler_DefaultPercussionBankMSB bankLSB:kAUSampler_DefaultBankLSB withPatch:0]; // Percussion
     
     // Print out the graph to the console
     CAShow(self.processingGraph);
@@ -696,6 +647,7 @@ static void CheckError(OSStatus error, const char *operation)
                    1,
                    _effectState.mFFTLength);
         for (UInt32 i = 0; i < _effectState.mFFTLength; ++i) {
+            //printf("%d - %f\n", (unsigned int)i, tmpData[i]);
             outFFTData[i] = (SInt32)tmpData[i];
         }
         
@@ -730,19 +682,19 @@ static void CheckError(OSStatus error, const char *operation)
         MusicSequenceGetIndTrack(_midiFile.sequence, 4, &t5);
         
         AUNode n1, n2, n3, n4, n5;
-        AUGraphGetIndNode(self.processingGraph, 0, &n1);
-        AUGraphGetIndNode(self.processingGraph, 1, &n2);
-        AUGraphGetIndNode(self.processingGraph, 2, &n3);
-        AUGraphGetIndNode(self.processingGraph, 3, &n4);
-        AUGraphGetIndNode(self.processingGraph, 4, &n5);
+        AUGraphGetIndNode(self.processingGraph, 2, &n1);
+        AUGraphGetIndNode(self.processingGraph, 3, &n2);
+        AUGraphGetIndNode(self.processingGraph, 4, &n3);
+        AUGraphGetIndNode(self.processingGraph, 5, &n4);
+        AUGraphGetIndNode(self.processingGraph, 6, &n5);
         
         MusicTrackSetDestNode(t1, n1);
         MusicTrackSetDestNode(t2, n2);
         MusicTrackSetDestNode(t3, n3);
-        //MusicTrackSetDestNode(t4, n4);
+        MusicTrackSetDestNode(t4, n4);
         MusicTrackSetDestNode(t5, n5);
         
-        // Create a client
+        /*/ Create a client
         MIDIClientRef virtualMidi;
         CheckError(MIDIClientCreate(CFSTR("Virtual Client"), MyMIDINotifyProc, NULL, &virtualMidi),
                    "Couldn't create MIDIClient");
@@ -753,7 +705,7 @@ static void CheckError(OSStatus error, const char *operation)
                    "Couldn't create a virtual endpoint");
         
         // Set the endpoint of the track 4 to be our virtual endpoint
-        MusicTrackSetDestMIDIEndpoint(t4, virtualEndpoint);
+        MusicTrackSetDestMIDIEndpoint(t4, virtualEndpoint);*/
         
         // Start the song
         [_midiFile play];

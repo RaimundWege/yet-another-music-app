@@ -55,6 +55,7 @@ typedef struct {
 + (id)audioHost;
 
 - (void)start;
+- (void)play;
 - (BOOL)computeFFT:(int32_t *)outFFTData;
 - (UInt32)maxFPS;
 

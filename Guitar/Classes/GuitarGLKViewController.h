@@ -14,7 +14,10 @@
     float currentTime;
     AudioHost *ah;
     NSArray *notes;
+    
+    NSUInteger fftLength;
     int32_t *l_fftData;
+    SInt32 *fftData;
 }
 
 @property (strong, nonatomic) EAGLContext *context;

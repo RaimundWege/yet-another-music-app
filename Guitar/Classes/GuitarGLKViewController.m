@@ -9,6 +9,8 @@
 #import "GuitarGLKViewController.h"
 #import "AppDelegate.h"
 
+#define clamp(min, x, max) ((x < min) ? min : (x > max) ? max : x)
+
 static GLKVector4 stringColors[6];
 static GLKVector4 fretGridColor;
 static GLKVector4 chordColor;
@@ -30,13 +32,16 @@ static float stringHeight;
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     self.effect = [[GLKBaseEffect alloc] init];
-    self.preferredFramesPerSecond = 10;
+    self.preferredFramesPerSecond = 30;
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     ah = appDelegate.audioHost;
+    [ah play];
     notes = [ah.midiFile notesForTrack:3];
-    //l_fftData = new int32_t[ah.maxFPS / 2];
-    l_fftData = (int32_t *)malloc(sizeof(int32_t) * (ah.maxFPS / 2));
+    
+    fftLength = ah.maxFPS / 2;
+    fftData = (SInt32 *)(realloc(fftData, sizeof(SInt32) * fftLength));
+    l_fftData = (int32_t *)malloc(sizeof(int32_t) * fftLength);
     
     stringHeight = 0.03;
     
@@ -66,7 +71,7 @@ static float stringHeight;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return YES;
 }
 
 #pragma mark - GLKViewDelegate
@@ -75,10 +80,6 @@ static float stringHeight;
 {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    if ([ah computeFFT:l_fftData]) {
-        NSLog(@"compute");
-    }
     
     //        +1.0 y
     //
@@ -145,7 +146,8 @@ static float stringHeight;
         self.effect.useConstantColor = GL_TRUE;
         self.effect.constantColor = fretGridColor;
         [self.effect prepareToDraw];
-        glLineWidthx(2.0);
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(3.0);
         glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
         glDrawArrays(GL_LINE_STRIP, 0, 2);
     }
@@ -165,7 +167,6 @@ static float stringHeight;
         self.effect.useConstantColor = GL_TRUE;
         self.effect.constantColor = fretGridColor;
         [self.effect prepareToDraw];
-        glLineWidth(1.0);
         glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
@@ -209,9 +210,38 @@ static float stringHeight;
 {
     currentTime = [ah.midiFile getTime];
     
-    //NSLog(@"Current time: %f", [ah.midiFile getTime]);
-    
-
+    if ([ah computeFFT:l_fftData]) {
+        memmove(fftData, l_fftData, sizeof(Float32) * fftLength);
+        
+        /*int y, maxY;
+        maxY = 1024;
+        for (y = 0; y < maxY; y++)
+        {
+            CGFloat yFract = (CGFloat)y / (CGFloat)(maxY - 1);
+            CGFloat fftIdx = yFract * ((CGFloat)fftLength);
+            
+            double fftIdx_i, fftIdx_f;
+            fftIdx_f = modf(fftIdx, &fftIdx_i);
+            
+            SInt8 fft_l, fft_r;
+            CGFloat fft_l_fl, fft_r_fl;
+            CGFloat interpVal;
+            
+            fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
+            fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
+            fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
+            fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
+            interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
+            
+            test = MAX(test, fft_r);
+            interpVal = clamp(0., interpVal, 1.);
+            
+            drawBuffer[y] = interpVal * 120;
+        }*/
+        
+        
+        NSLog(@"compute");
+    }
 }
 
 @end
