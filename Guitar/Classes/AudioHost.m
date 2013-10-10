@@ -135,35 +135,36 @@
     // Setup an ASBD in the iPhone canonical format
     AudioStreamBasicDescription rioASBD;
 	memset(&rioASBD, 0, sizeof(rioASBD));
-	/*rioASBD.mSampleRate        = hardwareSampleRate;
-	rioASBD.mFormatID          = kAudioFormatLinearPCM;
-	rioASBD.mFormatFlags       = kAudioFormatFlagsCanonical;
-	rioASBD.mBytesPerPacket    = 2;
-	rioASBD.mFramesPerPacket   = 1;
-	rioASBD.mBytesPerFrame     = 2; // = mBytesPerPacket * mFramesPerPacket
-	rioASBD.mChannelsPerFrame  = 1;
-	rioASBD.mBitsPerChannel    = 16;*/
-    /*size_t bytesPerSample = sizeof(float);
-    rioASBD.mSampleRate        = hardwareSampleRate;
-    rioASBD.mFormatID          = kAudioFormatLinearPCM;
-    rioASBD.mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked;
-    rioASBD.mBytesPerPacket    = bytesPerSample;
-    rioASBD.mFramesPerPacket   = 1;
-    rioASBD.mBytesPerFrame     = bytesPerSample * 1; // = mBytesPerPacket * mFramesPerPacket
-    rioASBD.mChannelsPerFrame  = 1;
-    rioASBD.mBitsPerChannel    = 8 * bytesPerSample;*/
-    //size_t bytesPerSample = sizeof(float);
-    rioASBD.mSampleRate        = hardwareSampleRate;
-    rioASBD.mFormatID          = kAudioFormatLinearPCM;
-    rioASBD.mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved;
-    rioASBD.mBytesPerPacket    = 4;
-    rioASBD.mFramesPerPacket   = 1;
-    rioASBD.mBytesPerFrame     = 4;
-    rioASBD.mChannelsPerFrame  = 2;
-    rioASBD.mBitsPerChannel    = 32;
+    rioASBD.mSampleRate         = hardwareSampleRate;
+    rioASBD.mFormatID           = kAudioFormatLinearPCM;
+	/*rioASBD.mFormatFlags        = kAudioFormatFlagsCanonical;
+    rioASBD.mBytesPerPacket     = 2;
+	rioASBD.mFramesPerPacket    = 1;
+    rioASBD.mBytesPerFrame      = rioASBD.mBytesPerPacket * rioASBD.mFramesPerPacket;
+	rioASBD.mBitsPerChannel     = 8 * rioASBD.mBytesPerPacket;
+	rioASBD.mChannelsPerFrame   = 1;*/
+	/*rioASBD.mFormatFlags      = kAudioFormatFlagsCanonical;
+	rioASBD.mBytesPerPacket     = 2;
+	rioASBD.mFramesPerPacket    = 1;
+	rioASBD.mBytesPerFrame      = 2; // = mBytesPerPacket * mFramesPerPacket
+	rioASBD.mChannelsPerFrame   = 1;
+	rioASBD.mBitsPerChannel     = 16;*/
+    /*rioASBD.mFormatFlags      = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked;
+    rioASBD.mBytesPerPacket     = bytesPerSample;
+    rioASBD.mFramesPerPacket    = 1;
+    rioASBD.mBytesPerFrame      = bytesPerSample * 1; // = mBytesPerPacket * mFramesPerPacket
+    rioASBD.mChannelsPerFrame   = 1;
+    rioASBD.mBitsPerChannel     = 8 * bytesPerSample;*/
+    size_t bytesPerSample       = sizeof(float);
+    rioASBD.mFormatFlags        = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked |kAudioFormatFlagIsNonInterleaved;
+    rioASBD.mBytesPerPacket     = bytesPerSample;
+    rioASBD.mFramesPerPacket    = 1;
+    rioASBD.mBytesPerFrame      = rioASBD.mBytesPerPacket * rioASBD.mFramesPerPacket;
+    rioASBD.mChannelsPerFrame   = 1;
+    rioASBD.mBitsPerChannel     = 8 * bytesPerSample;
     [self printASBD:rioASBD withName:@"RIO unit"];
     
-	// Set ASBD for input (bus 1) on RIO's output scope (mic)
+    // Set ASBD for input (microphone) on RIO's output scope (bus 1)
 	CheckError(AudioUnitSetProperty(_rioUnit,
                                     kAudioUnitProperty_StreamFormat,
                                     kAudioUnitScope_Output,
@@ -171,6 +172,15 @@
                                     &rioASBD,
                                     sizeof(rioASBD)),
 			   "Couldn't set ASBD for RIO on output scope / bus 1");
+    
+	// Set ASBD for output (speaker) on RIO's input scope (bus 0)
+	CheckError(AudioUnitSetProperty(_rioUnit,
+                                    kAudioUnitProperty_StreamFormat,
+                                    kAudioUnitScope_Input,
+                                    bus0,
+                                    &rioASBD,
+                                    sizeof(rioASBD)),
+			   "Couldn't set ASBD for RIO on input scope / bus 0");
  
     // Initialize and start RIO unit
 	CheckError(AudioUnitInitialize(_rioUnit),
@@ -191,7 +201,7 @@
     CheckError(AUGraphNodeInfo(self.processingGraph, distortionNode, NULL, &_distortionUnit),
                "Couldn't obtain Distortion unit from its corresponding node");
     
-    // Set ASBD for output (bus 0) on Distortion's input scope
+    // Set ASBD for Distortion's input scope (bus 0)
     CheckError(AudioUnitSetProperty(_distortionUnit,
                                     kAudioUnitProperty_StreamFormat,
                                     kAudioUnitScope_Input,
@@ -199,6 +209,15 @@
                                     &rioASBD,
                                     sizeof(rioASBD)),
                "Couldn't set ASBD for Distortion on input scope / bus 0");
+    
+    // Set ASBD for Distortion's output scope (bus 0)
+    CheckError(AudioUnitSetProperty(_distortionUnit,
+                                    kAudioUnitProperty_StreamFormat,
+                                    kAudioUnitScope_Output,
+                                    bus0,
+                                    &rioASBD,
+                                    sizeof(rioASBD)),
+               "Couldn't set ASBD for Distortion on output scope / bus 0");
     
     // Get the maximum frames per slices from the RIO unit
     UInt32 maxFPS;
@@ -225,6 +244,11 @@
     _effectState.mDspSplitComplex.realp = (Float32 *)calloc(_effectState.mFFTLength, sizeof(Float32));
     _effectState.mDspSplitComplex.imagp = (Float32 *)calloc(_effectState.mFFTLength, sizeof(Float32));
     _effectState.mSpectrumAnalyse = vDSP_create_fftsetup(_effectState.mLog2N, kFFTRadix2);
+    
+    // generate the window values and store them in the hamming window buffer    
+    _effectState.mHammingWindow = (Float32 *)calloc(_effectState.mNumberFrames, sizeof(Float32));
+    vDSP_hamm_window(_effectState.mHammingWindow, _effectState.mNumberFrames, 0);
+    
     OSAtomicIncrement32Barrier(&_effectState.mNeedsAudioData);
     
     // Set callback function
@@ -445,6 +469,10 @@ OSStatus InputRenderCallback(void                       *inRefCon,
                                ioData),
 			   "Couldn't render from RIO unit");
 	
+    //Float32 *buffer1 = (Float32 *)ioData->mBuffers[0].mData;
+    //UInt32 *buffer2 = (UInt32 *)ioData->mBuffers[0].mData;
+    //printf("%f %i\n", buffer1[511], (unsigned int)buffer2[511]);
+    
     //        _                                        _        _
     //       | |                                      (_)      | |
     //  _ __ | | __ _  ___ ___   _ __ ___   __ _  __ _ _  ___  | |__   ___ _ __ ___
@@ -586,14 +614,27 @@ static void CheckError(OSStatus error, const char *operation)
 {
     if (_effectState.mHasAudioData) {
         
-        // Generate a split complex vector from the real data
+        // Multiply samples with hamming window
+        vDSP_vmul(_effectState.mAudioBuffer,
+                  1,
+                  _effectState.mHammingWindow,
+                  1,
+                  _effectState.mAudioBuffer,
+                  1,
+                  _effectState.mNumberFrames);
+        
+        /*printf("start\n");
+        for (int i = 0; i < _effectState.mNumberFrames; i++) {
+			printf("%f\n", _effectState.mAudioBuffer[i]);
+		}*/
+        
+        // Generate a split complex vector from the real data / split data (1- 16) into odds and evens
         vDSP_ctoz((COMPLEX *)_effectState.mAudioBuffer,
                   2,
                   &_effectState.mDspSplitComplex,
                   1,
                   _effectState.mFFTLength);
         
-        // Take the FFT and scale appropriately
         vDSP_fft_zrip(_effectState.mSpectrumAnalyse,
                       &_effectState.mDspSplitComplex,
                       1,
@@ -612,44 +653,57 @@ static void CheckError(OSStatus error, const char *operation)
                    1,
                    _effectState.mFFTLength);
         
-        // Zero out the nyquist value
-        _effectState.mDspSplitComplex.imagp[0] = 0.0;
-        
-        // Convert the FFT data to dB
-        Float32 tmpData[_effectState.mFFTLength];
-        vDSP_zvmags(&_effectState.mDspSplitComplex,
-                    1,
-                    tmpData,
-                    1,
-                    _effectState.mFFTLength);
-        
-        // In order to avoid taking log10 of zero, an adjusting factor is added in to make the minimum value equal -128dB
-        vDSP_vsadd(tmpData,
+        // ABS
+        vDSP_zvabs(&_effectState.mDspSplitComplex,
                    1,
-                   &_effectState.mAdjust0DB,
-                   tmpData,
+                   _effectState.mDspSplitComplex.realp,
                    1,
                    _effectState.mFFTLength);
-        Float32 one = 1;
-        vDSP_vdbcon(tmpData,
-                    1,
-                    &one,
-                    tmpData,
-                    1,
-                    _effectState.mFFTLength,
-                    0);
         
-        // Convert floating point data to integer
-        vDSP_vsmul(tmpData,
-                   1,
-                   &_effectState.m24BitFracScale,
-                   tmpData,
-                   1,
-                   _effectState.mFFTLength);
-        for (UInt32 i = 0; i < _effectState.mFFTLength; ++i) {
-            //printf("%d - %f\n", (unsigned int)i, tmpData[i]);
-            outFFTData[i] = (SInt32)tmpData[i];
+        // Get log of absolute values for passing to inverse FFT for cepstrum
+        for (int i = 0; i < _effectState.mFFTLength; i++) {
+            _effectState.mDspSplitComplex.realp[i] = logf(_effectState.mDspSplitComplex.realp[i]);
         }
+        
+        // Perform the invere FFT
+        vDSP_fft_zrip(_effectState.mSpectrumAnalyse,
+                      &_effectState.mDspSplitComplex,
+                      1,
+                      _effectState.mLog2N,
+                      kFFTDirection_Inverse);
+        /*vDSP_vsmul(_effectState.mDspSplitComplex.realp,
+                   1,
+                   &_effectState.mFFTNormFactor,
+                   _effectState.mDspSplitComplex.realp,
+                   1,
+                   _effectState.mFFTLength);
+        vDSP_vsmul(_effectState.mDspSplitComplex.imagp,
+                   1,
+                   &_effectState.mFFTNormFactor,
+                   _effectState.mDspSplitComplex.imagp,
+                   1,
+                   _effectState.mFFTLength);*/
+        
+        // ABS
+        vDSP_zvabs(&_effectState.mDspSplitComplex,
+                   1,
+                   _effectState.mDspSplitComplex.realp,
+                   1,
+                   _effectState.mFFTLength);
+        
+        float m1 = 44100.0 / 700;
+        float m2 = 44100.0 / 70;
+        
+        //printf("start\n");
+        float max = 0.0;
+        int fx = 0;
+        for (int i = 0; i < _effectState.mFFTLength; i++) {
+            if (i > m1 && i < m2 && max < _effectState.mDspSplitComplex.realp[i]) {
+                max = _effectState.mDspSplitComplex.realp[i];
+                fx = i;
+            }
+        }
+        printf("%f\n", (44100.0 / fx) / 2);
         
         OSAtomicDecrement32Barrier(&_effectState.mHasAudioData);
         OSAtomicIncrement32Barrier(&_effectState.mNeedsAudioData);
@@ -661,6 +715,11 @@ static void CheckError(OSStatus error, const char *operation)
     }
     
     return NO;
+}
+
+- (float)MagnitudeSquaredX:(float)x andY:(float)y
+{
+	return ((x * x) + (y * y));
 }
 
 #pragma mark Functions
@@ -708,7 +767,7 @@ static void CheckError(OSStatus error, const char *operation)
         MusicTrackSetDestMIDIEndpoint(t4, virtualEndpoint);*/
         
         // Start the song
-        [_midiFile play];
+        //[_midiFile play];
     }
 }
 

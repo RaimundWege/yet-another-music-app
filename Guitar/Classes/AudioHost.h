@@ -30,6 +30,17 @@ typedef struct {
     UInt32              mLog2N;
     UInt32              mAudioBufferSize;
     int32_t             mAudioBufferCurrentIndex;
+    
+    
+    
+    // N = number of samples in your buffer
+    //int N = _audioSample.capacity();
+    Float32             *mHammingWindow;
+    // allocate space for a hamming window
+    //float* hammingWindow = (float *) malloc(sizeof(float) * N);
+
+
+
 } EffectState;
 
 @interface AudioHost : NSObject {

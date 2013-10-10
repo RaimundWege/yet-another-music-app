@@ -31,7 +31,6 @@
 		AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */; };
 		AC2D910517FB835100F4D443 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910317FB835000F4D443 /* OpenGLES.framework */; };
 		AC2D910617FB835100F4D443 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910417FB835100F4D443 /* QuartzCore.framework */; };
-		AC2D910917FC17BC00F4D443 /* MIDISample.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D910817FC17BC00F4D443 /* MIDISample.m */; };
 		AC2D911817FF71FD00F4D443 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D911717FF71FD00F4D443 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +67,6 @@
 		AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuitarGLKViewController.m; path = Guitar/Classes/GuitarGLKViewController.m; sourceTree = "<group>"; };
 		AC2D910317FB835000F4D443 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AC2D910417FB835100F4D443 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		AC2D910717FC17BC00F4D443 /* MIDISample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDISample.h; path = Guitar/Classes/MIDISample.h; sourceTree = "<group>"; };
-		AC2D910817FC17BC00F4D443 /* MIDISample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDISample.m; path = Guitar/Classes/MIDISample.m; sourceTree = "<group>"; };
 		AC2D911717FF71FD00F4D443 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -103,8 +100,6 @@
 				AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */,
 				AC2D910017FB813700F4D443 /* GuitarGLKViewController.h */,
 				AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */,
-				AC2D910717FC17BC00F4D443 /* MIDISample.h */,
-				AC2D910817FC17BC00F4D443 /* MIDISample.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -275,7 +270,6 @@
 				AC0118CB17FAC99800EC44B0 /* AudioHost.m in Sources */,
 				AC2D90FA17FB4A7A00F4D443 /* MIDIFile.m in Sources */,
 				AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */,
-				AC2D910917FC17BC00F4D443 /* MIDISample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -211,37 +211,26 @@ static float stringHeight;
     currentTime = [ah.midiFile getTime];
     
     if ([ah computeFFT:l_fftData]) {
-        memmove(fftData, l_fftData, sizeof(Float32) * fftLength);
-        
-        /*int y, maxY;
-        maxY = 1024;
-        for (y = 0; y < maxY; y++)
-        {
-            CGFloat yFract = (CGFloat)y / (CGFloat)(maxY - 1);
-            CGFloat fftIdx = yFract * ((CGFloat)fftLength);
-            
-            double fftIdx_i, fftIdx_f;
-            fftIdx_f = modf(fftIdx, &fftIdx_i);
-            
-            SInt8 fft_l, fft_r;
-            CGFloat fft_l_fl, fft_r_fl;
-            CGFloat interpVal;
-            
-            fft_l = (fftData[(int)fftIdx_i] & 0xFF000000) >> 24;
-            fft_r = (fftData[(int)fftIdx_i + 1] & 0xFF000000) >> 24;
-            fft_l_fl = (CGFloat)(fft_l + 80) / 64.;
-            fft_r_fl = (CGFloat)(fft_r + 80) / 64.;
-            interpVal = fft_l_fl * (1. - fftIdx_f) + fft_r_fl * fftIdx_f;
-            
-            test = MAX(test, fft_r);
-            interpVal = clamp(0., interpVal, 1.);
-            
-            drawBuffer[y] = interpVal * 120;
-        }*/
+        //NSLog(@"compute");
         
         
-        NSLog(@"compute");
+        /*memmove(fftData, l_fftData, sizeof(Float32) * fftLength);
+        float dominantFrequency = 0;
+		int bin = -1;
+		for (int i = 0; i < fftLength; i += 2) {
+			float curFreq = [self magnitudeSquaredX:fftData[i] andY:fftData[i+1]];
+			if (curFreq > dominantFrequency) {
+				dominantFrequency = curFreq;
+				bin = (i + 1) / 2;
+			}
+		}
+        NSLog(@"compute %i", bin);*/
     }
+}
+
+- (float)magnitudeSquaredX:(SInt32)x andY:(SInt32)y
+{
+	return ((x * x) + (y * y));
 }
 
 @end
