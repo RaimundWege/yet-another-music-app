@@ -8,12 +8,12 @@
 
 #import <AudioToolbox/MusicPlayer.h>
 
-extern NSString *const MIDINoteTimestampKey;
-extern NSString *const MIDINoteDurationKey;
-extern NSString *const MIDINotePitchKey;
-extern NSString *const MIDINoteTrackIndexKey;
-extern NSString *const MIDINoteFretKey;
-extern NSString *const MIDINoteStringKey;
+#define MIDI_NOTE_TIMESTAMP_KEY @"ts"
+#define MIDI_NOTE_DURATION_KEY @"dr"
+#define MIDI_NOTE_PITCH_KEY @"pt"
+#define MIDI_NOTE_TRACK_KEY @"tk"
+#define MIDI_NOTE_FRET_KEY @"fr"
+#define MIDI_NOTE_STRING_KEY @"st"
 
 @interface MIDIFile : NSObject {
 @private
@@ -29,9 +29,7 @@ extern NSString *const MIDINoteStringKey;
 - (id)initWithPath:(NSString *)path;
 
 - (MusicTimeStamp)beatsForSeconds:(Float64)seconds;
-- (NSArray *)notes;
-- (NSArray *)notesForTrack:(int)inTrackIndex;
-
+- (NSDictionary *)getStringNotes;
 - (MusicTimeStamp)getTime;
 
 - (BOOL)play;

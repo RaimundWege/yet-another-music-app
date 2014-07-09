@@ -11,9 +11,8 @@
 		AC0118CE17FAD02700EC44B0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */; };
 		AC0118CF17FAD02700EC44B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */; };
 		AC0118D117FADF8C00EC44B0 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */; };
-		AC0118D517FAE4EB00EC44B0 /* instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D417FAE4EB00EC44B0 /* instruments.dls */; };
-		AC0118D817FAE54D00EC44B0 /* offspring.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D717FAE54D00EC44B0 /* offspring.mid */; };
 		AC0118DA17FAE9ED00EC44B0 /* instruments.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */; };
+		AC14017618381A3F000861E7 /* UIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AC14017518381A3F000861E7 /* UIBarButtonItem.m */; };
 		AC23F16617EAF98C00F6FB7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16517EAF98C00F6FB7B /* UIKit.framework */; };
 		AC23F16817EAF98C00F6FB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16717EAF98C00F6FB7B /* Foundation.framework */; };
 		AC23F16A17EAF98C00F6FB7B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC23F16917EAF98C00F6FB7B /* CoreGraphics.framework */; };
@@ -25,13 +24,42 @@
 		AC23F17C17EAF98C00F6FB7B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC23F17B17EAF98C00F6FB7B /* Default-568h@2x.png */; };
 		AC23F17F17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC23F17D17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard */; };
 		AC23F18217EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC23F18017EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard */; };
-		AC23F18517EAF98C00F6FB7B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC23F18417EAF98C00F6FB7B /* ViewController.m */; };
 		AC2D90FA17FB4A7A00F4D443 /* MIDIFile.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */; };
 		AC2D90FF17FB810700F4D443 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D90FE17FB810700F4D443 /* GLKit.framework */; };
 		AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */; };
 		AC2D910517FB835100F4D443 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910317FB835000F4D443 /* OpenGLES.framework */; };
 		AC2D910617FB835100F4D443 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D910417FB835100F4D443 /* QuartzCore.framework */; };
 		AC2D911817FF71FD00F4D443 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC2D911717FF71FD00F4D443 /* Accelerate.framework */; };
+		AC720E0F1826D5F0009F10BD /* one.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E061826D5F0009F10BD /* one.mid */; };
+		AC720E101826D5F0009F10BD /* eight.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E071826D5F0009F10BD /* eight.mid */; };
+		AC720E111826D5F0009F10BD /* five.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E081826D5F0009F10BD /* five.mid */; };
+		AC720E121826D5F0009F10BD /* four.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E091826D5F0009F10BD /* four.mid */; };
+		AC720E131826D5F0009F10BD /* nine.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E0A1826D5F0009F10BD /* nine.mid */; };
+		AC720E141826D5F0009F10BD /* seven.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E0B1826D5F0009F10BD /* seven.mid */; };
+		AC720E151826D5F0009F10BD /* six.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E0C1826D5F0009F10BD /* six.mid */; };
+		AC720E161826D5F0009F10BD /* three.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E0D1826D5F0009F10BD /* three.mid */; };
+		AC720E171826D5F0009F10BD /* two.mid in Resources */ = {isa = PBXBuildFile; fileRef = AC720E0E1826D5F0009F10BD /* two.mid */; };
+		AC720E1D182778FB009F10BD /* PianoRollGLKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC720E1C182778FB009F10BD /* PianoRollGLKViewController.m */; };
+		AC720E2018277D0C009F10BD /* TabulatureGLKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC720E1F18277D0C009F10BD /* TabulatureGLKViewController.m */; };
+		AC720E221827D7EC009F10BD /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = AC720E211827D7EC009F10BD /* sprite.png */; };
+		AC720E24182815CA009F10BD /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = AC720E23182815CA009F10BD /* background.png */; };
+		AC720E271829C3AB009F10BD /* SongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC720E261829C3AB009F10BD /* SongCell.m */; };
+		AC9AB7B8182115CA007613CF /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7B4182115CA007613CF /* SWRevealViewController.m */; };
+		AC9AB7BC18211A7A007613CF /* SidebarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7BB18211A7A007613CF /* SidebarTableViewController.m */; };
+		AC9AB7BF18211BC5007613CF /* SongTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7BE18211BC5007613CF /* SongTableViewController.m */; };
+		AC9AB7C918211F4A007613CF /* sidebar_songs.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C318211F4A007613CF /* sidebar_songs.png */; };
+		AC9AB7CA18211F4A007613CF /* sidebar_songs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C418211F4A007613CF /* sidebar_songs@2x.png */; };
+		AC9AB7CB18211F4A007613CF /* sidebar_tuner.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C518211F4A007613CF /* sidebar_tuner.png */; };
+		AC9AB7CC18211F4A007613CF /* sidebar_tuner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C618211F4A007613CF /* sidebar_tuner@2x.png */; };
+		AC9AB7CD18211F4A007613CF /* sidebar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C718211F4A007613CF /* sidebar_settings.png */; };
+		AC9AB7CE18211F4A007613CF /* sidebar_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7C818211F4A007613CF /* sidebar_settings@2x.png */; };
+		AC9AB7D118211FC1007613CF /* header_menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7CF18211FC1007613CF /* header_menu_icon.png */; };
+		AC9AB7D218211FC1007613CF /* header_menu_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7D018211FC1007613CF /* header_menu_icon@2x.png */; };
+		AC9AB7DB18215BBB007613CF /* TunerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7DA18215BBB007613CF /* TunerViewController.m */; };
+		AC9AB7DE18215C1A007613CF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7DD18215C1A007613CF /* SettingsViewController.m */; };
+		AC9AB7E118216353007613CF /* SongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9AB7E018216353007613CF /* SongViewController.m */; };
+		AC9AB7E41821AC3B007613CF /* tuner_needle.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7E21821AC3B007613CF /* tuner_needle.png */; };
+		AC9AB7E51821AC3B007613CF /* tuner_background.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9AB7E31821AC3B007613CF /* tuner_background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,9 +68,9 @@
 		AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
-		AC0118D417FAE4EB00EC44B0 /* instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; name = instruments.dls; path = Guitar/Ressources/Sounds/instruments.dls; sourceTree = "<group>"; };
-		AC0118D717FAE54D00EC44B0 /* offspring.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = offspring.mid; path = Guitar/Ressources/Songs/offspring.mid; sourceTree = "<group>"; };
 		AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = instruments.sf2; path = Guitar/Ressources/Sounds/instruments.sf2; sourceTree = "<group>"; };
+		AC14017418381A3F000861E7 /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBarButtonItem.h; path = Guitar/Classes/UIBarButtonItem.h; sourceTree = "<group>"; };
+		AC14017518381A3F000861E7 /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIBarButtonItem.m; path = Guitar/Classes/UIBarButtonItem.m; sourceTree = "<group>"; };
 		AC23F16217EAF98C00F6FB7B /* Guitar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guitar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC23F16517EAF98C00F6FB7B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AC23F16717EAF98C00F6FB7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,8 +86,6 @@
 		AC23F17B17EAF98C00F6FB7B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AC23F17E17EAF98C00F6FB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		AC23F18117EAF98C00F6FB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		AC23F18317EAF98C00F6FB7B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AC23F18417EAF98C00F6FB7B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AC2D90F817FB4A7A00F4D443 /* MIDIFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIFile.h; path = Guitar/Classes/MIDIFile.h; sourceTree = "<group>"; };
 		AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDIFile.m; path = Guitar/Classes/MIDIFile.m; sourceTree = "<group>"; };
 		AC2D90FE17FB810700F4D443 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -68,6 +94,45 @@
 		AC2D910317FB835000F4D443 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AC2D910417FB835100F4D443 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AC2D911717FF71FD00F4D443 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		AC720E061826D5F0009F10BD /* one.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = one.mid; path = Guitar/Ressources/Songs/one.mid; sourceTree = "<group>"; };
+		AC720E071826D5F0009F10BD /* eight.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = eight.mid; path = Guitar/Ressources/Songs/eight.mid; sourceTree = "<group>"; };
+		AC720E081826D5F0009F10BD /* five.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = five.mid; path = Guitar/Ressources/Songs/five.mid; sourceTree = "<group>"; };
+		AC720E091826D5F0009F10BD /* four.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = four.mid; path = Guitar/Ressources/Songs/four.mid; sourceTree = "<group>"; };
+		AC720E0A1826D5F0009F10BD /* nine.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = nine.mid; path = Guitar/Ressources/Songs/nine.mid; sourceTree = "<group>"; };
+		AC720E0B1826D5F0009F10BD /* seven.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = seven.mid; path = Guitar/Ressources/Songs/seven.mid; sourceTree = "<group>"; };
+		AC720E0C1826D5F0009F10BD /* six.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = six.mid; path = Guitar/Ressources/Songs/six.mid; sourceTree = "<group>"; };
+		AC720E0D1826D5F0009F10BD /* three.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = three.mid; path = Guitar/Ressources/Songs/three.mid; sourceTree = "<group>"; };
+		AC720E0E1826D5F0009F10BD /* two.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = two.mid; path = Guitar/Ressources/Songs/two.mid; sourceTree = "<group>"; };
+		AC720E1B182778FB009F10BD /* PianoRollGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PianoRollGLKViewController.h; path = Guitar/Classes/PianoRollGLKViewController.h; sourceTree = "<group>"; };
+		AC720E1C182778FB009F10BD /* PianoRollGLKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PianoRollGLKViewController.m; path = Guitar/Classes/PianoRollGLKViewController.m; sourceTree = "<group>"; };
+		AC720E1E18277D0C009F10BD /* TabulatureGLKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabulatureGLKViewController.h; path = Guitar/Classes/TabulatureGLKViewController.h; sourceTree = "<group>"; };
+		AC720E1F18277D0C009F10BD /* TabulatureGLKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabulatureGLKViewController.m; path = Guitar/Classes/TabulatureGLKViewController.m; sourceTree = "<group>"; };
+		AC720E211827D7EC009F10BD /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sprite.png; path = Guitar/Ressources/Images/sprite.png; sourceTree = "<group>"; };
+		AC720E23182815CA009F10BD /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Guitar/Ressources/Images/background.png; sourceTree = "<group>"; };
+		AC720E251829C3AB009F10BD /* SongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongCell.h; path = Guitar/Classes/SongCell.h; sourceTree = "<group>"; };
+		AC720E261829C3AB009F10BD /* SongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongCell.m; path = Guitar/Classes/SongCell.m; sourceTree = "<group>"; };
+		AC9AB7B4182115CA007613CF /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Guitar/Library/SWRevealViewController.m; sourceTree = "<group>"; };
+		AC9AB7B5182115CA007613CF /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Guitar/Library/SWRevealViewController.h; sourceTree = "<group>"; };
+		AC9AB7BA18211A7A007613CF /* SidebarTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SidebarTableViewController.h; path = Guitar/Classes/SidebarTableViewController.h; sourceTree = "<group>"; };
+		AC9AB7BB18211A7A007613CF /* SidebarTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SidebarTableViewController.m; path = Guitar/Classes/SidebarTableViewController.m; sourceTree = "<group>"; };
+		AC9AB7BD18211BC5007613CF /* SongTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongTableViewController.h; path = Guitar/Classes/SongTableViewController.h; sourceTree = "<group>"; };
+		AC9AB7BE18211BC5007613CF /* SongTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongTableViewController.m; path = Guitar/Classes/SongTableViewController.m; sourceTree = "<group>"; };
+		AC9AB7C318211F4A007613CF /* sidebar_songs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar_songs.png; path = Guitar/Ressources/Images/sidebar_songs.png; sourceTree = "<group>"; };
+		AC9AB7C418211F4A007613CF /* sidebar_songs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sidebar_songs@2x.png"; path = "Guitar/Ressources/Images/sidebar_songs@2x.png"; sourceTree = "<group>"; };
+		AC9AB7C518211F4A007613CF /* sidebar_tuner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar_tuner.png; path = Guitar/Ressources/Images/sidebar_tuner.png; sourceTree = "<group>"; };
+		AC9AB7C618211F4A007613CF /* sidebar_tuner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sidebar_tuner@2x.png"; path = "Guitar/Ressources/Images/sidebar_tuner@2x.png"; sourceTree = "<group>"; };
+		AC9AB7C718211F4A007613CF /* sidebar_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar_settings.png; path = Guitar/Ressources/Images/sidebar_settings.png; sourceTree = "<group>"; };
+		AC9AB7C818211F4A007613CF /* sidebar_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sidebar_settings@2x.png"; path = "Guitar/Ressources/Images/sidebar_settings@2x.png"; sourceTree = "<group>"; };
+		AC9AB7CF18211FC1007613CF /* header_menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header_menu_icon.png; path = Guitar/Ressources/Images/header_menu_icon.png; sourceTree = "<group>"; };
+		AC9AB7D018211FC1007613CF /* header_menu_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "header_menu_icon@2x.png"; path = "Guitar/Ressources/Images/header_menu_icon@2x.png"; sourceTree = "<group>"; };
+		AC9AB7D918215BBB007613CF /* TunerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TunerViewController.h; path = Guitar/Classes/TunerViewController.h; sourceTree = "<group>"; };
+		AC9AB7DA18215BBB007613CF /* TunerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TunerViewController.m; path = Guitar/Classes/TunerViewController.m; sourceTree = "<group>"; };
+		AC9AB7DC18215C1A007613CF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Guitar/Classes/SettingsViewController.h; sourceTree = "<group>"; };
+		AC9AB7DD18215C1A007613CF /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Guitar/Classes/SettingsViewController.m; sourceTree = "<group>"; };
+		AC9AB7DF18216353007613CF /* SongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SongViewController.h; path = Guitar/Classes/SongViewController.h; sourceTree = "<group>"; };
+		AC9AB7E018216353007613CF /* SongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongViewController.m; path = Guitar/Classes/SongViewController.m; sourceTree = "<group>"; };
+		AC9AB7E21821AC3B007613CF /* tuner_needle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tuner_needle.png; path = Guitar/Ressources/Images/tuner_needle.png; sourceTree = "<group>"; };
+		AC9AB7E31821AC3B007613CF /* tuner_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tuner_background.png; path = Guitar/Ressources/Images/tuner_background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,12 +159,30 @@
 		AC0118C817FAC93400EC44B0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AC14017418381A3F000861E7 /* UIBarButtonItem.h */,
+				AC14017518381A3F000861E7 /* UIBarButtonItem.m */,
+				AC9AB7BA18211A7A007613CF /* SidebarTableViewController.h */,
+				AC9AB7BB18211A7A007613CF /* SidebarTableViewController.m */,
 				AC0118C917FAC99800EC44B0 /* AudioHost.h */,
 				AC0118CA17FAC99800EC44B0 /* AudioHost.m */,
 				AC2D90F817FB4A7A00F4D443 /* MIDIFile.h */,
 				AC2D90F917FB4A7A00F4D443 /* MIDIFile.m */,
 				AC2D910017FB813700F4D443 /* GuitarGLKViewController.h */,
 				AC2D910117FB813800F4D443 /* GuitarGLKViewController.m */,
+				AC9AB7BD18211BC5007613CF /* SongTableViewController.h */,
+				AC9AB7BE18211BC5007613CF /* SongTableViewController.m */,
+				AC9AB7D918215BBB007613CF /* TunerViewController.h */,
+				AC9AB7DA18215BBB007613CF /* TunerViewController.m */,
+				AC9AB7DC18215C1A007613CF /* SettingsViewController.h */,
+				AC9AB7DD18215C1A007613CF /* SettingsViewController.m */,
+				AC9AB7DF18216353007613CF /* SongViewController.h */,
+				AC9AB7E018216353007613CF /* SongViewController.m */,
+				AC720E1B182778FB009F10BD /* PianoRollGLKViewController.h */,
+				AC720E1C182778FB009F10BD /* PianoRollGLKViewController.m */,
+				AC720E1E18277D0C009F10BD /* TabulatureGLKViewController.h */,
+				AC720E1F18277D0C009F10BD /* TabulatureGLKViewController.m */,
+				AC720E251829C3AB009F10BD /* SongCell.h */,
+				AC720E261829C3AB009F10BD /* SongCell.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -107,6 +190,7 @@
 		AC0118D217FAE47900EC44B0 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				AC9AB7C218211F3B007613CF /* Images */,
 				AC0118D617FAE4F300EC44B0 /* Songs */,
 				AC0118D317FAE4D400EC44B0 /* Sounds */,
 			);
@@ -117,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				AC0118D917FAE9ED00EC44B0 /* instruments.sf2 */,
-				AC0118D417FAE4EB00EC44B0 /* instruments.dls */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -125,7 +208,15 @@
 		AC0118D617FAE4F300EC44B0 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				AC0118D717FAE54D00EC44B0 /* offspring.mid */,
+				AC720E061826D5F0009F10BD /* one.mid */,
+				AC720E071826D5F0009F10BD /* eight.mid */,
+				AC720E081826D5F0009F10BD /* five.mid */,
+				AC720E091826D5F0009F10BD /* four.mid */,
+				AC720E0A1826D5F0009F10BD /* nine.mid */,
+				AC720E0B1826D5F0009F10BD /* seven.mid */,
+				AC720E0C1826D5F0009F10BD /* six.mid */,
+				AC720E0D1826D5F0009F10BD /* three.mid */,
+				AC720E0E1826D5F0009F10BD /* two.mid */,
 			);
 			name = Songs;
 			sourceTree = "<group>";
@@ -133,6 +224,7 @@
 		AC23F15917EAF98C00F6FB7B = {
 			isa = PBXGroup;
 			children = (
+				AC9AB7AD18211503007613CF /* Library */,
 				AC0118C817FAC93400EC44B0 /* Classes */,
 				AC23F16417EAF98C00F6FB7B /* Frameworks */,
 				AC23F16B17EAF98C00F6FB7B /* Guitar */,
@@ -153,15 +245,15 @@
 			isa = PBXGroup;
 			children = (
 				AC2D911717FF71FD00F4D443 /* Accelerate.framework */,
-				AC2D910317FB835000F4D443 /* OpenGLES.framework */,
-				AC2D910417FB835100F4D443 /* QuartzCore.framework */,
-				AC2D90FE17FB810700F4D443 /* GLKit.framework */,
-				AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */,
 				AC0118CC17FAD02700EC44B0 /* AudioToolbox.framework */,
 				AC0118CD17FAD02700EC44B0 /* AVFoundation.framework */,
-				AC23F16517EAF98C00F6FB7B /* UIKit.framework */,
-				AC23F16717EAF98C00F6FB7B /* Foundation.framework */,
 				AC23F16917EAF98C00F6FB7B /* CoreGraphics.framework */,
+				AC0118D017FADF8C00EC44B0 /* CoreMIDI.framework */,
+				AC23F16717EAF98C00F6FB7B /* Foundation.framework */,
+				AC2D90FE17FB810700F4D443 /* GLKit.framework */,
+				AC2D910317FB835000F4D443 /* OpenGLES.framework */,
+				AC2D910417FB835100F4D443 /* QuartzCore.framework */,
+				AC23F16517EAF98C00F6FB7B /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,8 +265,6 @@
 				AC23F17517EAF98C00F6FB7B /* AppDelegate.m */,
 				AC23F17D17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard */,
 				AC23F18017EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard */,
-				AC23F18317EAF98C00F6FB7B /* ViewController.h */,
-				AC23F18417EAF98C00F6FB7B /* ViewController.m */,
 				AC23F16C17EAF98C00F6FB7B /* Supporting Files */,
 			);
 			path = Guitar;
@@ -192,6 +282,34 @@
 				AC23F17B17EAF98C00F6FB7B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC9AB7AD18211503007613CF /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AC9AB7B4182115CA007613CF /* SWRevealViewController.m */,
+				AC9AB7B5182115CA007613CF /* SWRevealViewController.h */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		AC9AB7C218211F3B007613CF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AC720E23182815CA009F10BD /* background.png */,
+				AC720E211827D7EC009F10BD /* sprite.png */,
+				AC9AB7CF18211FC1007613CF /* header_menu_icon.png */,
+				AC9AB7E21821AC3B007613CF /* tuner_needle.png */,
+				AC9AB7E31821AC3B007613CF /* tuner_background.png */,
+				AC9AB7D018211FC1007613CF /* header_menu_icon@2x.png */,
+				AC9AB7C318211F4A007613CF /* sidebar_songs.png */,
+				AC9AB7C418211F4A007613CF /* sidebar_songs@2x.png */,
+				AC9AB7C518211F4A007613CF /* sidebar_tuner.png */,
+				AC9AB7C618211F4A007613CF /* sidebar_tuner@2x.png */,
+				AC9AB7C718211F4A007613CF /* sidebar_settings.png */,
+				AC9AB7C818211F4A007613CF /* sidebar_settings@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +340,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Raimund Wege";
+				TargetAttributes = {
+					AC23F16117EAF98C00F6FB7B = {
+						DevelopmentTeam = VT36D2BMD3;
+					};
+				};
 			};
 			buildConfigurationList = AC23F15D17EAF98C00F6FB7B /* Build configuration list for PBXProject "Guitar" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -247,13 +370,32 @@
 			files = (
 				AC23F17017EAF98C00F6FB7B /* InfoPlist.strings in Resources */,
 				AC23F17817EAF98C00F6FB7B /* Default.png in Resources */,
+				AC720E101826D5F0009F10BD /* eight.mid in Resources */,
 				AC23F17A17EAF98C00F6FB7B /* Default@2x.png in Resources */,
 				AC23F17C17EAF98C00F6FB7B /* Default-568h@2x.png in Resources */,
+				AC9AB7CD18211F4A007613CF /* sidebar_settings.png in Resources */,
+				AC720E121826D5F0009F10BD /* four.mid in Resources */,
+				AC720E111826D5F0009F10BD /* five.mid in Resources */,
 				AC23F17F17EAF98C00F6FB7B /* MainStoryboard_iPhone.storyboard in Resources */,
+				AC9AB7E41821AC3B007613CF /* tuner_needle.png in Resources */,
+				AC720E141826D5F0009F10BD /* seven.mid in Resources */,
+				AC720E131826D5F0009F10BD /* nine.mid in Resources */,
+				AC720E171826D5F0009F10BD /* two.mid in Resources */,
+				AC720E24182815CA009F10BD /* background.png in Resources */,
+				AC9AB7CB18211F4A007613CF /* sidebar_tuner.png in Resources */,
 				AC23F18217EAF98C00F6FB7B /* MainStoryboard_iPad.storyboard in Resources */,
-				AC0118D517FAE4EB00EC44B0 /* instruments.dls in Resources */,
-				AC0118D817FAE54D00EC44B0 /* offspring.mid in Resources */,
+				AC9AB7CA18211F4A007613CF /* sidebar_songs@2x.png in Resources */,
+				AC720E161826D5F0009F10BD /* three.mid in Resources */,
+				AC9AB7CC18211F4A007613CF /* sidebar_tuner@2x.png in Resources */,
+				AC9AB7C918211F4A007613CF /* sidebar_songs.png in Resources */,
+				AC720E221827D7EC009F10BD /* sprite.png in Resources */,
+				AC9AB7D118211FC1007613CF /* header_menu_icon.png in Resources */,
 				AC0118DA17FAE9ED00EC44B0 /* instruments.sf2 in Resources */,
+				AC9AB7CE18211F4A007613CF /* sidebar_settings@2x.png in Resources */,
+				AC720E151826D5F0009F10BD /* six.mid in Resources */,
+				AC720E0F1826D5F0009F10BD /* one.mid in Resources */,
+				AC9AB7D218211FC1007613CF /* header_menu_icon@2x.png in Resources */,
+				AC9AB7E51821AC3B007613CF /* tuner_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +406,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9AB7DB18215BBB007613CF /* TunerViewController.m in Sources */,
+				AC9AB7B8182115CA007613CF /* SWRevealViewController.m in Sources */,
+				AC720E2018277D0C009F10BD /* TabulatureGLKViewController.m in Sources */,
+				AC9AB7E118216353007613CF /* SongViewController.m in Sources */,
 				AC23F17217EAF98C00F6FB7B /* main.m in Sources */,
+				AC720E1D182778FB009F10BD /* PianoRollGLKViewController.m in Sources */,
 				AC23F17617EAF98C00F6FB7B /* AppDelegate.m in Sources */,
-				AC23F18517EAF98C00F6FB7B /* ViewController.m in Sources */,
 				AC0118CB17FAC99800EC44B0 /* AudioHost.m in Sources */,
 				AC2D90FA17FB4A7A00F4D443 /* MIDIFile.m in Sources */,
+				AC9AB7BF18211BC5007613CF /* SongTableViewController.m in Sources */,
 				AC2D910217FB813800F4D443 /* GuitarGLKViewController.m in Sources */,
+				AC720E271829C3AB009F10BD /* SongCell.m in Sources */,
+				AC9AB7BC18211A7A007613CF /* SidebarTableViewController.m in Sources */,
+				AC14017618381A3F000861E7 /* UIBarButtonItem.m in Sources */,
+				AC9AB7DE18215C1A007613CF /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +515,8 @@
 		AC23F18917EAF98C00F6FB7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Guitar/Guitar-Prefix.pch";
 				INFOPLIST_FILE = "Guitar/Guitar-Info.plist";
@@ -376,6 +529,8 @@
 		AC23F18A17EAF98C00F6FB7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Guitar/Guitar-Prefix.pch";
 				INFOPLIST_FILE = "Guitar/Guitar-Info.plist";
